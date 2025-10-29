@@ -67,7 +67,7 @@ const ProductsPage: React.FC = () => {
             </div>
             <div className="gap-6 w-full">
                 <div className={`transition-all duration-300 flex w-full justify-between`}>
-                    <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 ${isOpen ?'lg:grid-cols-5 xl:grid-cols-5' : 'lg:grid-cols-7 xl:grid-cols-7' }  gap-6`}>
+                    <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 ${isOpen ?'lg:grid-cols-3 xl:grid-cols-3' : 'lg:grid-cols-5 xl:grid-cols-5' }  gap-6`}>
                         {visibleProducts.map((product) => (
                             <ProductCard key={product.id} product={product} />
                         ))}
