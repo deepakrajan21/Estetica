@@ -46,11 +46,15 @@ const cartSlice = createSlice({
       else if(item?.quantity === 1) state.items = state.items.filter((item) => item.id !== action.payload);
       if (state.items.length === 0) state.isOpen = false
     },
+    removeFromCart: (state, action: PayloadAction<number>) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+      if (state.items.length === 0) state.isOpen = false
+    },
     toggleCart: (state) => {
       state.isOpen = !state.isOpen;
     }
   },
 });
 
-export const { addToCart, removeAllFromCart, increment, decrement } = cartSlice.actions;
+export const { addToCart, removeAllFromCart, increment, decrement, removeFromCart } = cartSlice.actions;
 export default cartSlice.reducer;

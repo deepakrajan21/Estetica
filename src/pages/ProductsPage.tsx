@@ -4,51 +4,8 @@ import ProductCard from "../components/ProductCard";
 import Cart from "../components/Cart";
 import { useSelector } from "react-redux";
 import type { RootState } from "../app/store";
+import { sampleProducts, categories } from "../data/productsData";
 
-
-interface Product {
-    id: number;
-    name: string;
-    image: string;
-    price: number;
-    category: string;
-}
-
-const sampleProducts: Product[] = [
-    { id: 1, name: "Trillion Protein Transfusion", image: "/assets/p1.png", price: 1200, category: "Massage Therapy" },
-    { id: 2, name: "TIRTIR Mask Fit Red Cushion", image: "/assets/p2.png", price: 2300, category: "Nail Bar" },
-    { id: 3, name: "Kay Beauty Hydrating Foundation", image: "/assets/p3.png", price: 1800, category: "Hair Cut Wash & Style" },
-    { id: 4, name: "L'Oreal Professional Hair Serum", image: "/assets/p4.png", price: 900, category: "Manicure & Pedicure" },
-    { id: 5, name: "Suroskie My Glow All-In-One Tinted Moisturizer with SPF 30", image: "/assets/p5.png", price: 500, category: "Skin Care" },
-    { id: 6, name: "Trillion Protein Transfusion", image: "/assets/p1.png", price: 1200, category: "Massage Therapy" },
-    { id: 7, name: "TIRTIR Mask Fit Red Cushion", image: "/assets/p2.png", price: 2300, category: "Nail Bar" },
-    { id: 8, name: "Kay Beauty Hydrating Foundation", image: "/assets/p3.png", price: 1800, category: "Hair Cut Wash & Style" },
-    { id: 9, name: "L'Oreal Professional Hair Serum", image: "/assets/p4.png", price: 900, category: "Manicure & Pedicure" },
-    { id: 10, name: "Suroskie My Glow All-In-One Tinted Moisturizer with SPF 30", image: "/assets/p5.png", price: 500, category: "Skin Care" },
-    { id: 11, name: "Trillion Protein Transfusion", image: "/assets/p1.png", price: 1200, category: "Massage Therapy" },
-    { id: 12, name: "TIRTIR Mask Fit Red Cushion", image: "/assets/p2.png", price: 2300, category: "Nail Bar" },
-    { id: 13, name: "Kay Beauty Hydrating Foundation", image: "/assets/p3.png", price: 1800, category: "Hair Cut Wash & Style" },
-    { id: 14, name: "L'Oreal Professional Hair Serum", image: "/assets/p4.png", price: 900, category: "Manicure & Pedicure" },
-    { id: 15, name: "Suroskie My Glow All-In-One Tinted Moisturizer with SPF 30", image: "/assets/p5.png", price: 500, category: "Skin Care" },
-    { id: 16, name: "Trillion Protein Transfusion", image: "/assets/p1.png", price: 1200, category: "Massage Therapy" },
-    { id: 21, name: "TIRTIR Mask Fit Red Cushion", image: "/assets/p2.png", price: 2300, category: "Nail Bar" },
-    { id: 32, name: "Kay Beauty Hydrating Foundation", image: "/assets/p3.png", price: 1800, category: "Hair Cut Wash & Style" },
-    { id: 44, name: "L'Oreal Professional Hair Serum", image: "/assets/p4.png", price: 900, category: "Manicure & Pedicure" },
-    { id: 55, name: "Suroskie My Glow All-In-One Tinted Moisturizer with SPF 30", image: "/assets/p5.png", price: 500, category: "Skin Care" },
-    { id: 17, name: "Trillion Protein Transfusion", image: "/assets/p1.png", price: 1200, category: "Massage Therapy" },
-    { id: 28, name: "TIRTIR Mask Fit Red Cushion", image: "/assets/p2.png", price: 2300, category: "Nail Bar" },
-    { id: 37, name: "Kay Beauty Hydrating Foundation", image: "/assets/p3.png", price: 1800, category: "Hair Cut Wash & Style" },
-    { id: 46, name: "L'Oreal Professional Hair Serum", image: "/assets/p4.png", price: 900, category: "Manicure & Pedicure" },
-    { id: 53, name: "Suroskie My Glow All-In-One Tinted Moisturizer with SPF 30", image: "/assets/p5.png", price: 500, category: "Skin Care" }
-];
-
-const categories = [
-    "Massage Therapy",
-    "Hair Cut Wash & Style",
-    "Nail Bar",
-    "Manicure & Pedicure",
-    "Skin Care"
-];
 
 const ProductsPage: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState("All");
@@ -80,7 +37,7 @@ const ProductsPage: React.FC = () => {
                 <input
                     type="text"
                     placeholder="Search for Product !"
-                    className="pl-9 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    className="pl-9 pr-3 py-2 bg-white  border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -111,7 +68,7 @@ const ProductsPage: React.FC = () => {
             <div className="flex items-start gap-6 w-full">
                 <div className={`transition-all duration-300 flex w-full`}>
                     {/* Product grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-6">
+                    <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 ${isOpen ?'lg:grid-cols-5 xl:grid-cols-5' : 'lg:grid-cols-7 xl:grid-cols-7' }  gap-6`}>
                         {visibleProducts.map((product) => (
                             <ProductCard key={product.id} product={product} />
                         ))}
@@ -125,7 +82,7 @@ const ProductsPage: React.FC = () => {
 
                     {/* Side cart */}
                     {isOpen && (
-                        <div className="w-[320px] shrink-0 transition-all duration-300">
+                        <div className="ml-5 shrink-0 transition-all duration-300 md:col-span-1 lg:col-span-2 ">
                             <Cart />
                         </div>
                     )}
