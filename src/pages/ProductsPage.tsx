@@ -65,9 +65,8 @@ const ProductsPage: React.FC = () => {
                     </button>
                 ))}
             </div>
-            <div className="flex items-start gap-6 w-full">
-                <div className={`transition-all duration-300 flex w-full`}>
-                    {/* Product grid */}
+            <div className="gap-6 w-full">
+                <div className={`transition-all duration-300 flex w-full justify-between`}>
                     <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 ${isOpen ?'lg:grid-cols-5 xl:grid-cols-5' : 'lg:grid-cols-7 xl:grid-cols-7' }  gap-6`}>
                         {visibleProducts.map((product) => (
                             <ProductCard key={product.id} product={product} />
@@ -79,8 +78,6 @@ const ProductsPage: React.FC = () => {
                             </div>
                         )}
                     </div>
-
-                    {/* Side cart */}
                     {isOpen && (
                         <div className="ml-5 shrink-0 transition-all duration-300 md:col-span-1 lg:col-span-2 ">
                             <Cart />
